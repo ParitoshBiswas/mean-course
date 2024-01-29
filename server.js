@@ -24,12 +24,12 @@ const onError = (err) => {
     const bind = typeof port === "string" ? "pipe " + port : "port " + port;
     switch(err.code){
         case "EACCES":
-            console.log(bind + " requires elevated privilages");
+            console.error(bind + " requires elevated privilages");
             process.exit(1);
             break;
         
         case "EADDRINUSE":
-            console.log(bind + " is already in use");
+            console.error(bind + " is already in use");
             process.exit(1);
             break;
 
@@ -41,12 +41,12 @@ const onError = (err) => {
 const onListening = () => {
     const addr = server.address();
     const bind = typeof port === "string" ? "pipe " + port : "port " + port;
-    debug("Listening on ", bind); 
+    debug("Listening on " + bind); 
 }
 
 const port = noramalizePort(process.env.PORT || 3000);
 
-app.set('port', port);
+app.set("port", port);
 const server = http.createServer(app);
 server.on("error", onError);
 server.on("listening", onListening);

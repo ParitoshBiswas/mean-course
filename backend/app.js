@@ -11,8 +11,8 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('api/posts', (req, res, next) => {
-    posts = [
+app.use("/api/posts", (req, res, next) => {
+    const posts = [
         {
             id: "fthbjh321",
             title: "First server-side post",
