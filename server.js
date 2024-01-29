@@ -1,6 +1,6 @@
 const http = require("http");
 const app = require("./backend/app");
-const debug = require('debug')("node-angular");
+const debug = require("debug")("node-angular");
 
 const noramalizePort = (val) => {
     var port = parseInt(val, 10);
@@ -14,14 +14,14 @@ const noramalizePort = (val) => {
     }
 
     return false;
-}
+};
 
 const onError = (err) => {
-    if(err.syscall != "listen"){
+    if(err.syscall !== "listen"){
         throw err;
     }
 
-    const bind = typeof port === "string" ? "pipe " + port : "port " + port;
+    const bind = typeof addr === "string" ? "pipe " + addr : "port " + port;
     switch(err.code){
         case "EACCES":
             console.error(bind + " requires elevated privilages");
@@ -36,13 +36,13 @@ const onError = (err) => {
         default:
             throw err;
     }
-}
+};
 
 const onListening = () => {
     const addr = server.address();
-    const bind = typeof port === "string" ? "pipe " + port : "port " + port;
+    const bind = typeof addr === "string" ? "pipe " + addr : "port " + port;
     debug("Listening on " + bind); 
-}
+};
 
 const port = noramalizePort(process.env.PORT || 3000);
 
