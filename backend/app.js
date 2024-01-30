@@ -38,27 +38,20 @@ app.post("/api/posts", (req, res, next) => {
         title: req.body.title,
         content: req.body.content
     });
-    post.save();
-    console.log(post);
+    post.save();      // saving post to mongoDB
+    // console.log(post);
     res.status(201).json({ message: "Post Added successfully." });
 });
 
 //================Get All Posts REST API Middleware=================
 app.get("/api/posts", (req, res, next) => {
-    const posts = [
-        {
-            id: "fthbjh321",
-            title: "First server-side post",
-            content: "This is coming from the server"
-        },
-        {
-            id: "hbfuivsn456",
-            title: "Second server-side post",
-            content: "This is coming from the server!"
-        }
-    ];
 
-    res.status(200).json({ message: "Posts fetched successfully!", posts: posts});
+    Post.find().then(documents => {
+        console.log(documents);
+        res.status(200).json({
+            message: "Posts fetched successfully!",
+            posts: documents});
+    }); 
 });
 
 module.exports = app;
